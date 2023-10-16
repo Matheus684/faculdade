@@ -1,48 +1,46 @@
-from tkinter import *
+import time
+import tkinter as tk
+import subprocess
+from time import sleep
 import os
-
+from tkinter import *
 
 c = os.path.dirname(__file__)
 nomeArquivo = c + "\\Pontuacao.txt"
+
 def gravar_dados(text):
     print(text)
     arquivo = open(nomeArquivo, "a")
-    arquivo.write("Nome: %s" % unome.get())
+    arquivo.write("Nome: %s" % entry_name.get())
     arquivo.write("\n")
-    #arquivo.write(DinoGamer.gravar_dados('pontos: %s' % DinoGamer.pontos))
     arquivo.close()
 
-    for linha in arquivo:
-        linha = linha.rstrip()
-        print(linha)
-    arquivo.close()
+def start_game():
+    character_name = entry_name.get()
+    #message.config(text=f"Bem vindo, {character_name}! O game está iniciando...")
+    subprocess.run(["python", "DinoGamer.py", character_name])  # Passando o character_name como argumento
 
-'''e = os.path.dirname(__file__)
-nomeArquivo = e + "\\Pontuacao.txt"
+window = tk.Tk()
+window.configure(background='DarkSeaGreen')
+window.title("NOME DO JOGO")
+window.resizable(False, False)
 
-def gravar_pontos(number):
-    print(number)
-    documento = open(nomeArquivo, "a")
-    documento.write("pontos: %s" % DinoGamer.texto_pontos)
-    documento.write("\n")
-    documento.close()'''
+name_label = tk.Label(window, text="Username: ")
+name_label.grid(column=0, row=0)
+name_label.configure(background='Silver')
 
-janela = Tk()
-janela.title("Armazenador")  # titulo da janela
-janela.configure(bg='Black', )
+entry_name = tk.Entry(window)
+entry_name.grid(column=1, row=0)
 
-texto = Label(janela, text="insira seu nome aqui:", background='Darkgreen')  # seria uma descriçao
-texto.grid(column=0, row=0)  # tamanho
+botao_iniciar = tk.Button(window, text="Start Game", command=start_game)
+botao_iniciar.grid(column=4, row=2)
+botao_iniciar.configure(border='5', background='lightblue')
 
-unome = Entry(janela, width=50)
-unome.grid(column=0, row=1)
+botao_dois = tk.Button(window, text="Gravar", command=lambda: gravar_dados(entry_name.get()))
+botao_dois.grid(column=4, row=0)
+botao_dois.configure(border='5', background='lightblue')
 
-botao = Button(janela, text="Gravar", command=lambda: gravar_dados(unome.get()))
-botao.grid(column=0, row=2)
-botao.configure(bg='Red')
+message = tk.Label(window, text="")
+message.grid(column=3, row=4)
 
-botao_jogo = Button(janela, text="Play", command=lambda: DinoGamer.USEREVENT)
-botao_jogo.grid(column=1, row=2)
-botao_jogo.configure(bg="pink")
-
-janela.mainloop()
+window.mainloop()
