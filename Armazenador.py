@@ -18,7 +18,7 @@ def gravar_dados(text):
 def start_game():
     character_name = entry_name.get()
     #message.config(text=f"Bem vindo, {character_name}! O game está iniciando...")
-    subprocess.run(["python", "DinoGamer.py", character_name])  # Passando o character_name como argumento
+    subprocess.run(["python", "jogo.py", character_name])  # Passando o character_name como argumento
 
 window = tk.Tk()
 window.configure(background='DarkSeaGreen')
