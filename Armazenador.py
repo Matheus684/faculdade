@@ -1,23 +1,19 @@
-import time
 import tkinter as tk
 import subprocess
-from time import sleep
 import os
-from tkinter import *
 
 c = os.path.dirname(__file__)
 nomeArquivo = c + "\\Pontuacao.txt"
 
-def gravar_dados(text):
+def gravar_dados(text):#r
     print(text)
     arquivo = open(nomeArquivo, "a")
-    arquivo.write("Nome: %s" % entry_name.get())
+    arquivo.write("Nome: %s" % entry_name.get().upper())
     arquivo.write("\n")
     arquivo.close()
 
-def start_game():
+def start_game():#r
     character_name = entry_name.get()
-    #message.config(text=f"Bem vindo, {character_name}! O game está iniciando...")
     subprocess.run(["python", "jogo.py", character_name])  # Passando o character_name como argumento
 
 window = tk.Tk()
