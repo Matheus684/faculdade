@@ -2,41 +2,41 @@ import tkinter as tk
 import subprocess
 import os
 
+# Obtém o diretório atual do script
 c = os.path.dirname(__file__)
-nomeArquivo = c + "\\Pontuacao.txt"
+nomeArquivo = os.path.join(c, "Pontuacao.txt")
 
-def gravar_dados(text):#r
-    print(text)
-    arquivo = open(nomeArquivo, "a")
-    arquivo.write("Nome: %s" % entry_name.get().upper())
-    arquivo.write("\n")
-    arquivo.close()
+def gravar_dados_e_iniciar():
+    nome = entry_name.get().strip().upper()
+    if nome:
+        with open(nomeArquivo, "a") as arquivo:
+            arquivo.write(f"Nome: {nome}\n")
+        subprocess.run(["python", "jogo.py", nome])
 
-def start_game():#r
-    character_name = entry_name.get()
-    subprocess.run(["python", "jogo.py", character_name])  # Passando o character_name como argumento
-
+# Configuração da janela principal
 window = tk.Tk()
-window.configure(background='DarkSeaGreen')
 window.title("NOME DO JOGO")
+window.geometry("300x150")
 window.resizable(False, False)
+window.configure(background='DarkSeaGreen')
 
-name_label = tk.Label(window, text="Username: ")
-name_label.grid(column=0, row=0)
-name_label.configure(background='Silver')
+# Configuração dos elementos visuais
+title_label = tk.Label(window, text="Bem-vindo ao Jogo!", font=("Arial", 14, "bold"), bg='DarkSeaGreen', fg='white')
+title_label.pack(pady=10)
 
-entry_name = tk.Entry(window)
-entry_name.grid(column=1, row=0)
+name_label = tk.Label(window, text="Nome de Usuário:", bg='DarkSeaGreen', fg='white')
+name_label.pack(pady=5)
 
-botao_iniciar = tk.Button(window, text="Start Game", command=start_game)
-botao_iniciar.grid(column=4, row=2)
-botao_iniciar.configure(border='5', background='lightblue')
+entry_name = tk.Entry(window, width=30)
+entry_name.pack(pady=5)
 
-botao_dois = tk.Button(window, text="Gravar", command=lambda: gravar_dados(entry_name.get()))
-botao_dois.grid(column=4, row=0)
-botao_dois.configure(border='5', background='lightblue')
+button_frame = tk.Frame(window, bg='DarkSeaGreen')
+button_frame.pack(pady=5)
 
-message = tk.Label(window, text="")
-message.grid(column=3, row=4)
+botao_iniciar_e_gravar = tk.Button(button_frame, text="Iniciar Jogo", command=gravar_dados_e_iniciar, bg='lightblue', fg='white')
+botao_iniciar_e_gravar.pack(padx=5, pady=5)
+
+message = tk.Label(window, text="", bg='DarkSeaGreen', fg='white')
+message.pack(pady=5)
 
 window.mainloop()

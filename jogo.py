@@ -221,7 +221,7 @@ while True:  # parte de eventos
         som_colisao.play()
         colidiu = True
         arquivo = open(nomeArquivo, "a")
-        arquivo.write('Pontos: %s' % pontos)
+        arquivo.write('Pontos: %s\n' % pontos)
         print(arquivo)
         arquivo.close()
 
