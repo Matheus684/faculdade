@@ -6,12 +6,22 @@ import os
 c = os.path.dirname(__file__)
 nomeArquivo = os.path.join(c, "Pontuacao.txt")
 
+def calcular_media_jogadores():
+    with open(nomeArquivo, "r") as arquivo:
+        dados = arquivo.readlines()
+        pontuacoes = [int(dado.split(": ")[1]) for dado in dados if dado.startswith("Pontos:")]
+        if pontuacoes:
+            media = sum(pontuacoes) / len(pontuacoes)
+            with open(nomeArquivo, "a") as arquivo:
+                arquivo.write(f"Media de Pontos: {media}\n")
+
 def gravar_dados_e_iniciar():
     nome = entry_name.get().strip().upper()
     if nome:
         with open(nomeArquivo, "a") as arquivo:
             arquivo.write(f"Nome: {nome}\n")
         subprocess.run(["python", "jogo.py", nome])
+        calcular_media_jogadores()
 
 # Configuração da janela principal
 window = tk.Tk()
