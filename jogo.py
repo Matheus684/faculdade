@@ -11,8 +11,8 @@ c = os.path.dirname(__file__)
 nomeArquivo = c + "\\Pontuacao.txt"
 
 diretorio_principal = os.path.dirname(__file__)
-diretorio_imagens = os.path.join(diretorio_principal, 'imagensdino')
-diretorio_sons = os.path.join(diretorio_principal, 'audiodino')
+diretorio_imagens = os.path.join(diretorio_principal, 'imagensgame')
+diretorio_sons = os.path.join(diretorio_principal, 'audiogame')
 
 PRETO = (0, 0, 0)
 BRANCO = (255, 255, 255)
@@ -83,7 +83,7 @@ class Personagem(pygame.sprite.Sprite):  #####
             else:
                 self.rect.y = self.pos_y_inicial
 
-        if self.index_lista > 2:  # 2 e o indice do ultimo elemento  da pasta 'imagensdino'
+        if self.index_lista > 2:  # 2 e o indice do ultimo elemento  da pasta 'imagens'
             self.index_lista = 0
         self.index_lista += 0.20  # velocidade da mudança das sprites
         self.image = self.imagens_dino[int(self.index_lista)]
