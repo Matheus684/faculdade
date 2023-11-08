@@ -1,20 +1,27 @@
-def Soma_pontos(): # este soma os pontos
+def Soma_pontos():
     with open('Pontuacao.txt', 'r') as documento:
         files = documento.readlines()
         pontuacoes = [int(dado.split(": ")[1]) for dado in files if dado.startswith("Pontos: ")]
-        if pontuacoes != 0:
-            print(sum(pontuacoes))
+        if pontuacoes:
+            y = sum(pontuacoes)
+            return y
+        else:
+            return 0
 
-def Procura_nome(nome): #este pega o nome
+
+def Procura_nome(nome):
     with open('Pontuacao.txt', 'r') as arquivo:
         file = arquivo.read()
-        if file != 0:
+        if nome in file:
             x = file.count(nome)
-            print(x)  # ate aqui vai
-
-def juntar(): #juntar os valores de ambas funçoes e somar
+            return x
+        else:
+            return 0
 
 
 nome = input('Entre com um nome:').upper()
-print(Soma_pontos())
-print(Procura_nome(nome))
+soma = Soma_pontos()
+quantidade = Procura_nome(nome)
+
+print(f"Total de pontos: {soma / quantidade}")
+print(f"Quantidade de vezes que o nome '{nome}' aparece: {quantidade}")
