@@ -23,5 +23,5 @@ nome = input('Entre com um nome:').upper()
 soma = Soma_pontos()
 quantidade = Procura_nome(nome)
 
-print(f"Total de pontos: {soma / quantidade}")
+print(f"Total de pontos: {soma / quantidade :.2f}")
 print(f"Quantidade de vezes que o nome '{nome}' aparece: {quantidade}")
