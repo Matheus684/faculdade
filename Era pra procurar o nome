@@ -1,0 +1,45 @@
+import os
+
+c = os.path.dirname(__file__)
+nomeArquivo = os.path.join(c, "Pontuacao.txt")
+
+# esse codigo esta somando todos os pontos
+def calcular_media_jogadores(nome):
+    with open('Pontuacao.txt', "r") as arquivo:
+        dados = arquivo.readlines()
+        dardos = arquivo.read()
+        conteudo = dardos.count(nome)
+        pontuacoes = [int(dado.split(": ")[1]) for dado in dados if dado.startswith("Pontos: ")]
+        print((sum(pontuacoes), len(pontuacoes)))
+        y = sum(pontuacoes)
+        print(y, 'apenas a soma dos valores')
+        print(conteudo)
+        if pontuacoes != 0:
+            media = sum(pontuacoes) / len(pontuacoes)
+            return media
+        
+#esse codigo esta pegando a quantidade de nome que eu indico no input
+def contar_nome(nome):
+    with open('Pontuacao.txt', "r") as arquivo:
+        conteudo = arquivo.read()
+        pontuacoes = [int(dado.split(": ")[1]) for dado in conteudo if dado.startswith("Pontos: ")]
+        x = sum(pontuacoes) / conteudo.count(nome)
+        print((sum(pontuacoes), conteudo.count(nome)))
+        print(conteudo.count(nome), ' quantidade de vezes que o nome apareceu')
+        return x
+    
+# essa e a junçao 
+def careca_de_vez(nome):
+    with open('Pontuacao.txt', 'r') as arquivo:
+        conteudo = arquivo.read()
+        dados = arquivo.readlines()
+        pontuacoes = [int(dado.split(": ")[1]) for dado in dados if dado.startswith("Pontos: ")]
+        print(sum(pontuacoes), conteudo.count(nome), 'sera??')
+        if pontuacoes != 0:
+            media = sum(pontuacoes) / conteudo.count(nome)
+            return media
+
+nome = input('Qual nome procurar:').upper()
+print(calcular_media_jogadores(nome))
+print(contar_nome(nome))
+print(careca_de_vez(nome))
