@@ -24,7 +24,7 @@ largura = 640
 altura = 480
 
 tela = pygame.display.set_mode((largura, altura))
-screen = pygame.image.load('imagensdino/Pixel-Art-640x480.png')
+screen = pygame.image.load('imagensgame/Pixel-Art-640x480.png')
 pygame.display.set_caption('PatoPula')
 
 sprite_sheet = pygame.image.load(os.path.join(diretorio_imagens, 'sprite_teste1.png')).convert_alpha()
@@ -54,14 +54,14 @@ class Personagem(pygame.sprite.Sprite):  #####
         pygame.sprite.Sprite.__init__(self)
         self.som_pulo = pygame.mixer.Sound(os.path.join(diretorio_sons, 'quack_X5xDknE.mp3'))
         self.som_pulo.set_volume(1)
-        self.imagens_dino = []
+        self.imagens_game = []
         for i in range(3):
             img = sprite_sheet.subsurface((i * 32, 0), (32, 32))  # posiçao X e Y, colocando as sprites
             img = pygame.transform.scale(img, (32 * 3, 32 * 3))  # linha para aumentar o tamanho da sprite
-            self.imagens_dino.append(img)
+            self.imagens_game.append(img)
 
         self.index_lista = 0
-        self.image = self.imagens_dino[self.index_lista]
+        self.image = self.imagens_game[self.index_lista]
         self.rect = self.image.get_rect()
         self.mask = pygame.mask.from_surface(self.image)
         self.pos_y_inicial = altura - 64 - 96 // 2
@@ -86,7 +86,7 @@ class Personagem(pygame.sprite.Sprite):  #####
         if self.index_lista > 2:  # 2 e o indice do ultimo elemento  da pasta 'imagens'
             self.index_lista = 0
         self.index_lista += 0.20  # velocidade da mudança das sprites
-        self.image = self.imagens_dino[int(self.index_lista)]
+        self.image = self.imagens_game[int(self.index_lista)]
 
 
 class Nuvens(pygame.sprite.Sprite):
@@ -141,14 +141,14 @@ class Obj_one(pygame.sprite.Sprite):
 class Obj_voador(pygame.sprite.Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
-        self.imagens_dino = []
+        self.imagens_game = []
         for i in range(3, 7):
             img = sprite_sheet.subsurface((i * 32, 0), (32, 32))
             img = pygame.transform.scale(img, (32 * 3, 32 * 3))
-            self.imagens_dino.append(img)
+            self.imagens_game.append(img)
 
         self.index_lista = 0
-        self.image = self.imagens_dino[self.index_lista]
+        self.image = self.imagens_game[self.index_lista]
         self.mask = pygame.mask.from_surface(self.image)
         self.escolha = escolha_obstaculo
         self.rect = self.image.get_rect()
@@ -164,7 +164,7 @@ class Obj_voador(pygame.sprite.Sprite):
         if self.index_lista > 1:
             self.index_lista = 0
         self.index_lista += 0.25  # velocidade da mudança das sprites
-        self.image = self.imagens_dino[int(self.index_lista)]
+        self.image = self.imagens_game[int(self.index_lista)]
 
 
 todas_as_sprites = pygame.sprite.Group()
